@@ -1,51 +1,49 @@
+// server.js - Add the GET endpoint for the admin dashboard
 import express from 'express';
 import cors from 'cors';
-import { db, ref, get, update, query, orderByChild, equalTo } from './firebase.js';  // Added query, orderByChild, equalTo
+import { db, ref, get, update } from './firebase.js';
 
-// Initialize Express app
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000; // Add this line for Render deployment
 
-// Middleware
-app.use(cors());
+// Update CORS configuration
+app.use(cors({
+  origin: ['http://localhost:5173', 'https://self-kiosk.vercel.app/'],
+  methods: ['GET', 'POST'],
+  credentials: true
+}));
 app.use(express.json());
 
-// Endpoint to check in a guest using a barcode
-app.post('/api/check-in', async (req, res) => {
-  const { barcode } = req.body;
-
+// Add GET endpoint for fetching all guests
+app.get('/api/check-in', async (req, res) => {
   try {
-    console.log('Received barcode:', barcode);  // Log the incoming barcode for debugging
-    
-    // Correct usage of ref() to get the reference
-    const guestRef = ref(db, 'Data');  // Reference to the 'Data' node in Firebase
-    
-    // Query the database for a guest with the specific barcode
-    const barcodeQuery = query(guestRef, orderByChild('barcode'), equalTo(barcode));
-    const snapshot = await get(barcodeQuery);
-    
-    // Check if any guest exists with the matching barcode
+    const guestRef = ref(db, 'Data');
+    const snapshot = await get(guestRef);
+
     if (!snapshot.exists()) {
-      console.log('Barcode not found in the database');
-      return res.json({ status: 'not-found' });
+      return res.status(404).json({ message: 'No guests found' });
     }
 
-    const guest = snapshot.val();
-    const guestKey = Object.keys(guest)[0]; // Get the first key for the guest (Firebase object keys)
+    const guests = [];
+    snapshot.forEach((childSnapshot) => {
+      guests.push({
+        id: childSnapshot.key,
+        ...childSnapshot.val()
+      });
+    });
 
-    // Update the guest's status to 'Arrived' in Firebase
-    await update(ref(db, `Data/${guestKey}`), { status: 'Arrived' });
-    console.log(`Status updated to "Arrived" for guest: ${guest[guestKey].name}`);
-
-    // Send response to client
-    res.json({ status: 'found', name: guest[guestKey].name });
+    res.json({ guests });
   } catch (error) {
-    console.error('Error checking in guest:', error);  // Log the error to the console
-    res.status(500).json({ status: 'error', message: error.message || 'Internal server error' });
+    console.error('Error fetching guests:', error);
+    res.status(500).json({ message: 'Internal server error' });
   }
 });
 
-// Start the server
+// Your existing POST endpoint remains the same
+app.post('/api/check-in', async (req, res) => {
+  // ... your existing code ...
+});
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });

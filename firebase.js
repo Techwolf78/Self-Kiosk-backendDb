@@ -1,5 +1,7 @@
+// backend/firebase.js
+
 import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, get, set, update, query, orderByChild, equalTo } from 'firebase/database';  // Import necessary functions
+import { getDatabase, ref, get, set, update, onValue } from 'firebase/database';  // Added onValue to the imports
 
 // Firebase configuration
 const firebaseConfig = {
@@ -19,4 +21,4 @@ const app = initializeApp(firebaseConfig);
 // Get Firebase Realtime Database reference
 const db = getDatabase(app);
 
-export { db, ref, get, set, update, query, orderByChild, equalTo };  // Export necessary functions
+export { db, ref, get, set, update, onValue };  // Added onValue to exports
