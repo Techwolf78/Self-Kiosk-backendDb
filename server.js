@@ -1,3 +1,4 @@
+// Backend: server.js
 import express from 'express';
 import cors from 'cors';
 import { db, ref, get, update } from './firebase.js';
@@ -7,72 +8,35 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// Add a basic health check endpoint
+// Health check endpoint
 app.get('/', (req, res) => {
   res.json({ status: 'Server is running' });
 });
-app.post('/api/check-in', async (req, res) => {
-  console.log('Received request body:', req.body); // Log incoming request
-  const { barcode } = req.body;
-  
-  if (!barcode) {
-    console.log('No barcode provided in request');
-    return res.status(400).json({ 
-      status: 'error', 
-      message: 'Barcode is required' 
-    });
-  }
+
+// Get all guests endpoint
+app.get('/api/guests', async (req, res) => {
   try {
-    console.log('Attempting to connect to Firebase');
     const guestRef = ref(db, 'Data');
-    
-    console.log('Fetching data from Firebase');
     const snapshot = await get(guestRef);
     
     if (!snapshot.exists()) {
-      console.log('No data found in Firebase');
       return res.status(404).json({ 
         status: 'error', 
         message: 'No data found in database' 
       });
     }
 
-    console.log('Searching for barcode:', barcode);
-    let foundGuest = null;
-    let guestKey = null;
+    const guests = [];
     snapshot.forEach((childSnapshot) => {
-      const guest = childSnapshot.val();
-      console.log('Checking guest:', guest);
-      if (guest.barcode === barcode) {
-        foundGuest = guest;
-        guestKey = childSnapshot.key;
-      }
+      guests.push({
+        id: childSnapshot.key,
+        ...childSnapshot.val()
+      });
     });
 
-    if (foundGuest) {
-      console.log('Found guest:', foundGuest);
-      
-      try {
-        await update(ref(db, `Data/${guestKey}`), { status: 'Arrived' });
-        console.log('Successfully updated guest status');
-        
-        res.json({ 
-          status: 'found', 
-          name: foundGuest.name 
-        });
-      } catch (updateError) {
-        console.error('Error updating status:', updateError);
-        res.status(500).json({ 
-          status: 'error', 
-          message: 'Failed to update guest status' 
-        });
-      }
-    } else {
-      console.log('Guest not found with barcode:', barcode);
-      res.json({ status: 'not-found' });
-    }
+    res.json({ status: 'success', guests });
   } catch (error) {
-    console.error('Server error:', error);
+    console.error('Error fetching guests:', error);
     res.status(500).json({ 
       status: 'error', 
       message: 'Internal server error', 
@@ -81,6 +45,81 @@ app.post('/api/check-in', async (req, res) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+// Check-in endpoint remains the same
+app.post('/api/check-in', async (req, res) => {
+  // ... your existing check-in code ...
 });
+
+// Modified AdminDashboard.jsx
+const fetchGuests = async () => {
+  try {
+    const response = await fetch("https://self-kiosk-backenddb.onrender.com/api/guests");
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+  
+    const data = await response.json();
+  
+    if (data.status === 'success' && data.guests) {
+      const guestsList = data.guests.map((guest) => ({
+        id: guest.id,
+        serialNumber: guest.serialNumber,
+        barcode: guest.barcode,
+        name: guest.name,
+        organization: guest.organization || "N/A",
+        status: guest.status || "Pending",
+      }));
+      setGuests(guestsList);
+    } else {
+      console.log("No guests found or invalid response format");
+      setGuests([]);
+    }
+  } catch (error) {
+    console.error("Error fetching guests:", error);
+    setGuests([]);
+    // Optionally show an error message to the user
+  }
+  setLoading(false);
+};
+
+// Modified GateScanner.jsx check-in fetch
+const handleScan = async (data) => {
+  if (data) {
+    const barcode = data.text;
+    setScannedData(barcode);
+    setLoading(true);
+    setModalMessage('Processing...');
+
+    try {
+      const response = await fetch('https://self-kiosk-backenddb.onrender.com/api/check-in', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ barcode }),
+        credentials: 'include', // Add this if using cookies
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+
+      if (result.status === 'found') {
+        const welcomeMessage = `Welcome ${result.name}`;
+        setModalMessage(welcomeMessage);
+        speakMessageOnce(`Welcome to Synergy Sphere ${result.name}`);
+      } else {
+        setModalMessage("Barcode not found. Access Denied.");
+      }
+    } catch (error) {
+      console.error("Error verifying guest:", error);
+      setModalMessage("Error verifying guest. Please try again.");
+    } finally {
+      setLoading(false);
+      setShowScanner(false);
+    }
+  }
+};
