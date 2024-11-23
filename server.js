@@ -54,7 +54,7 @@ app.post("/api/check-in", async (req, res) => {
 const fetchGuests = async () => {
   try {
     const response = await fetch(
-      "https://self-kiosk-backenddb.onrender.com/api/guests"
+      "https://self-kiosk-backenddb-1.onrender.com/api/guests"
     );
 
     if (!response.ok) {
@@ -95,7 +95,7 @@ const handleScan = async (data) => {
 
     try {
       const response = await fetch(
-        "https://self-kiosk-backenddb.onrender.com/api/check-in",
+        "https://self-kiosk-backenddb-1.onrender.com/api/check-in",
         {
           method: "POST",
           headers: {
