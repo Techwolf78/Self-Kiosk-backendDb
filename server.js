@@ -18,7 +18,7 @@ app.get("/api/check-in", async (req, res) => {
     console.log("Fetching guests data from Firebase...");
 
     // Reference to the guest data in Firebase
-    const guestRef = ref(db, "Data");
+    const guestRef = ref(db, "data");
 
     // Fetch data from Firebase
     const snapshot = await get(guestRef);
