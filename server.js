@@ -7,14 +7,24 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// Add a basic health check endpoint
+// Basic health check endpoint
 app.get('/', (req, res) => {
   res.json({ status: 'Server is running' });
 });
+
+// Handle GET requests to /api/check-in (if someone makes a GET request)
+app.get('/api/check-in', (req, res) => {
+  res.status(405).json({
+    status: 'error',
+    message: 'Method Not Allowed. Use POST to check-in.'
+  });
+});
+
+// Handle POST requests to /api/check-in
 app.post('/api/check-in', async (req, res) => {
   console.log('Received request body:', req.body); // Log incoming request
   const { barcode } = req.body;
-  
+
   if (!barcode) {
     console.log('No barcode provided in request');
     return res.status(400).json({ 
@@ -22,6 +32,7 @@ app.post('/api/check-in', async (req, res) => {
       message: 'Barcode is required' 
     });
   }
+
   try {
     console.log('Attempting to connect to Firebase');
     const guestRef = ref(db, 'Data');
