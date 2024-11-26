@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
 });
 
 // Handle GET requests to /api/check-in (if someone makes a GET request)
-app.post('/api/check-in', (req, res) => {
+app.get('/api/check-in', (req, res) => {
   res.status(405).json({
     status: 'error',
     message: 'Method Not Allowed. Use POST to check-in.'
