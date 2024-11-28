@@ -13,7 +13,7 @@ app.use(express.json());
 
 // Your Telegram Bot API token and Chat ID
 const TELEGRAM_BOT_TOKEN = '7510065834:AAHKW9tb-lvJSPg6-5KKXesoThBExvSzQeg';  // Your bot token
-const TELEGRAM_CHAT_ID = '7510065834';  // Replace with your chat ID
+const TELEGRAM_CHAT_ID = '-1002269343860';  // Replace with your chat ID
 
 // Function to send message to Telegram bot
 const sendTelegramNotification = async (message) => {
