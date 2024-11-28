@@ -5,7 +5,10 @@ import axios from "axios";  // Import axios for making HTTP requests
 
 const app = express();
 const port = process.env.PORT || 5000;
-app.use(cors());
+
+// Enable CORS for all origins by setting the origin to '*'
+app.use(cors({ origin: "*" })); // This allows all domains to access your server
+
 app.use(express.json());
 
 // Your Telegram Bot API token and Chat ID
