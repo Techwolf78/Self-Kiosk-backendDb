@@ -1,11 +1,31 @@
 import express from "express";
 import cors from "cors";
 import { db, ref, get, update } from "./firebase.js";
+import axios from "axios";  // Import axios for making HTTP requests
 
 const app = express();
 const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
+
+// Your Telegram Bot API token and Chat ID
+const TELEGRAM_BOT_TOKEN = '7828559777:AAFbgLCtbPdcCAR_tRMAdPpnlCZUXB-EzBw';  // Your bot token
+const TELEGRAM_CHAT_ID = '1115377225';  // Replace with your chat ID
+
+// Function to send message to Telegram bot
+const sendTelegramNotification = async (message) => {
+  const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+  const params = {
+    chat_id: TELEGRAM_CHAT_ID,
+    text: message,  // The message you want to send
+  };
+
+  try {
+    await axios.post(url, params);
+  } catch (error) {
+    console.error("Error sending Telegram notification:", error);
+  }
+};
 
 // Basic health check endpoint
 app.get("/", (req, res) => {
@@ -104,6 +124,10 @@ app.post("/api/check-in", async (req, res) => {
       try {
         await update(ref(db, `Data/${guestKey}`), { status: "Arrived" });
         console.log("Successfully updated guest status");
+
+        // Send notification to Telegram bot
+        const message = `Guest ${foundGuest.name} has arrived. Status: Arrived`;
+        await sendTelegramNotification(message);  // Send the Telegram message
 
         res.json({
           status: "found",
