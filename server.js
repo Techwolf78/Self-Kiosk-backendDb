@@ -121,8 +121,18 @@ app.post("/api/check-in", async (req, res) => {
     if (foundGuest) {
       console.log("Found guest:", foundGuest);
 
+      // Check if the notification has already been sent
+      if (foundGuest.notificationSent) {
+        console.log("Notification already sent for this guest.");
+        return res.json({
+          status: "already-notified",
+          message: "Notification already sent for this guest.",
+        });
+      }
+
       try {
-        await update(ref(db, `Data/${guestKey}`), { status: "Arrived" });
+        // Mark the guest as having received the notification
+        await update(ref(db, `Data/${guestKey}`), { status: "Arrived", notificationSent: true });
         console.log("Successfully updated guest status");
 
         // Send notification to Telegram bot
