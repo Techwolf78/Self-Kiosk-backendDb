@@ -66,6 +66,7 @@ app.get("/api/check-in", async (req, res) => {
         name: guest.name,
         organization: guest.organization || "N/A", // Default if not present
         status: guest.status || "Pending", // Default if not present
+        arrivalTime: guest.arrivalTime || "N/A", // Include arrivalTime here
       });
     });
 
