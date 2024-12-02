@@ -35,6 +35,7 @@ app.get("/", (req, res) => {
   res.json({ status: "Server is running" });
 });
 
+
 // Handle GET requests to /api/check-in
 app.get("/api/check-in", async (req, res) => {
   try {
@@ -81,6 +82,7 @@ app.get("/api/check-in", async (req, res) => {
 });
 
 // Handle POST requests to /api/check-in
+// Handle POST requests to /api/check-in
 app.post("/api/check-in", async (req, res) => {
   console.log("Received request body:", req.body); // Log incoming request
   const { barcode } = req.body;
@@ -124,22 +126,20 @@ app.post("/api/check-in", async (req, res) => {
     if (foundGuest) {
       console.log("Found guest:", foundGuest);
 
-      // Check if the notification has already been sent
-      if (foundGuest.notificationSent) {
-        console.log("Notification already sent for this guest.");
-        return res.json({
-          status: "already-notified",
-          message: "Notification already sent for this guest.",
-        });
-      }
-
+      // New code to update arrival time and status without removing other data
       try {
-        // Mark the guest as having received the notification
-        await update(ref(db, `Data/${guestKey}`), { status: "Arrived", notificationSent: true });
-        console.log("Successfully updated guest status");
+        const currentTime = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
+
+        // Update the guest with arrival time, status, and any other data you want to keep
+        await update(ref(db, `Data/${guestKey}`), {
+          status: "Arrived", 
+          notificationSent: true,  // Keeps this flag to prevent re-notification
+          arrivalTime: currentTime  // Adding the arrival time field
+        });
+        console.log("Successfully updated guest status and arrival time");
 
         // Send notification to Telegram bot
-        const message = `Guest ${foundGuest.name} has arrived. Status: Arrived`;
+        const message = `Guest ${foundGuest.name} has arrived at ${currentTime}. Status: Arrived`;
         await sendTelegramNotification(message);  // Send the Telegram message
 
         res.json({

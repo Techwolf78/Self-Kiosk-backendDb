@@ -1,0 +1,324 @@
+{
+    "Data": {
+     "guest_1": {
+      "serialNumber": 1,
+      "name": "Mr Suvarnanidhi Rao",
+      "organization": "Philips",
+      "barcode": "1234567890",
+      "status": "Pending ",
+      "notificationSent": false
+     },
+     "guest_2": {
+      "serialNumber": 2,
+      "name": "Mr Ramchandra Honap",
+      "organization": "Coca Cola",
+      "barcode": "9876543210",
+      "status": "Pending ",
+      "notificationSent": false
+     },
+     "guest_3": {
+      "serialNumber": 3,
+      "name": "Mr Piyush Naik",
+      "organization": "OmniCom Global Solutions",
+      "barcode": "234567890",
+      "status": "Pending ",
+      "notificationSent": false
+     },
+     "guest_4": {
+      "serialNumber": 4,
+      "name": "Mr Chirag Aneja",
+      "organization": "Compass Group",
+      "barcode": "345678901",
+      "status": "Pending ",
+      "notificationSent": false
+     },
+     "guest_5": {
+      "serialNumber": 5,
+      "name": "Ms Prerna Arora",
+      "organization": "EXL Group",
+      "barcode": "456789012",
+      "status": "Pending ",
+      "notificationSent": false
+     },
+     "guest_6": {
+      "serialNumber": 6,
+      "name": "Mr Urvish Pandey",
+      "organization": "Mastercard",
+      "barcode": "567890123",
+      "status": "Pending ",
+      "notificationSent": false
+     },
+     "guest_7": {
+      "serialNumber": 7,
+      "name": "Ms Sunaina Dutta",
+      "organization": "Hettich",
+      "barcode": "678901234",
+      "status": "Pending ",
+      "notificationSent": false
+     },
+     "guest_8": {
+      "serialNumber": 8,
+      "name": "Mr Manroop Singh",
+      "organization": "Xperi inc",
+      "barcode": "789012345",
+      "status": "Pending ",
+      "notificationSent": false
+     },
+     "guest_9": {
+      "serialNumber": 9,
+      "name": "Mr Rajendra Raut",
+      "organization": "Jade Global",
+      "barcode": "890123456",
+      "status": "Pending ",
+      "notificationSent": false
+     },
+     "guest_10": {
+      "serialNumber": 10,
+      "name": "Mr Kaushik Das",
+      "organization": "TIAA",
+      "barcode": "901234567",
+      "status": "Pending ",
+      "notificationSent": false
+     },
+     "guest_11": {
+      "serialNumber": 11,
+      "name": "Mr Abhinav Mishra",
+      "organization": "Icertis",
+      "barcode": "1012345678",
+      "status": "Pending ",
+      "notificationSent": false
+     },
+     "guest_12": {
+      "serialNumber": 12,
+      "name": "Mr Shashank Vyas",
+      "organization": "Yash Technologies",
+      "barcode": "1123456789",
+      "status": "Pending ",
+      "notificationSent": false
+     },
+     "guest_13": {
+      "serialNumber": 13,
+      "name": "Mr Yashpal Singh Parihar",
+      "organization": "RWS",
+      "barcode": "1234567832",
+      "status": "Pending ",
+      "notificationSent": false
+     },
+     "guest_14": {
+      "serialNumber": 14,
+      "name": "Mr Karan Bakshi",
+      "organization": "Michelin Tyres",
+      "barcode": "1345678901",
+      "status": "Pending ",
+      "notificationSent": false
+     },
+     "guest_15": {
+      "serialNumber": 15,
+      "name": "Mr Paritosh Bakshi",
+      "organization": "Vision Waves",
+      "barcode": "1456789012",
+      "status": "Pending ",
+      "notificationSent": false
+     },
+     "guest_16": {
+      "serialNumber": 16,
+      "name": "Mr Vishwesh Ransing",
+      "organization": "Samsara",
+      "barcode": "1567890123",
+      "status": "Pending ",
+      "notificationSent": false
+     },
+     "guest_17": {
+      "serialNumber": 17,
+      "name": "Mr Vikram Chopra",
+      "organization": "Cybage",
+      "barcode": "1678901234",
+      "status": "Pending ",
+      "notificationSent": false
+     },
+     "guest_18": {
+      "serialNumber": 18,
+      "name": "Mr Rakesh Tiwari",
+      "organization": "Lodha",
+      "barcode": "1789012345",
+      "status": "Pending ",
+      "notificationSent": false
+     },
+     "guest_19": {
+      "serialNumber": 19,
+      "name": "Ms Swati Sawhney",
+      "organization": "Ericsson",
+      "barcode": "1890123456",
+      "status": "Pending ",
+      "notificationSent": false
+     },
+     "guest_20": {
+      "serialNumber": 20,
+      "name": "Mr Aniruddha Khekale",
+      "organization": "Waaree Group",
+      "barcode": "1901234567",
+      "status": "Pending ",
+      "notificationSent": false
+     },
+     "guest_21": {
+      "serialNumber": 21,
+      "name": "Mr Pravin Sawant",
+      "organization": "63 Moons Technologies",
+      "barcode": "2012345678",
+      "status": "Pending ",
+      "notificationSent": false
+     },
+     "guest_22": {
+      "serialNumber": 22,
+      "name": "Mr Amol Joshi",
+      "organization": "Emerson",
+      "barcode": "2123456789",
+      "status": "Pending ",
+      "notificationSent": false
+     },
+     "guest_23": {
+      "serialNumber": 23,
+      "name": "M & G Global Services",
+      "organization": "M & G Global Services",
+      "barcode": "2234567890",
+      "status": "Pending ",
+      "notificationSent": false
+     },
+     "guest_24": {
+      "serialNumber": 24,
+      "name": "Ms Neha Vyas",
+      "organization": "Pattern",
+      "barcode": "2345678901",
+      "status": "Pending ",
+      "notificationSent": false
+     },
+     "guest_25": {
+      "serialNumber": 25,
+      "name": "Mr Shirish Bavdekar",
+      "organization": "Dassault Systemes",
+      "barcode": "2456789012",
+      "status": "Pending ",
+      "notificationSent": false
+     },
+     "guest_26": {
+      "serialNumber": 26,
+      "name": "Ms Tina Mathew",
+      "organization": "NSEIT",
+      "barcode": "2567890123",
+      "status": "Pending ",
+      "notificationSent": false
+     },
+     "guest_27": {
+      "serialNumber": 27,
+      "name": "Mr Unmesh Pawar",
+      "organization": "Dentsu International",
+      "barcode": "2678901234",
+      "status": "Pending ",
+      "notificationSent": false
+     },
+     "guest_28": {
+      "serialNumber": 28,
+      "name": "Mr Krishna Chaturvedi",
+      "organization": "Autodesk",
+      "barcode": "2689012345",
+      "status": "Pending ",
+      "notificationSent": false
+     },
+     "guest_29": {
+      "serialNumber": 29,
+      "name": "Mr Sandeep Choubey",
+      "organization": "Burns & Mcdonnell",
+      "barcode": "2790123456",
+      "status": "Pending ",
+      "notificationSent": false
+     },
+     "guest_30": {
+      "serialNumber": 30,
+      "name": "Mr Mohit Thapliyal",
+      "organization": "Worley",
+      "barcode": "2901234567",
+      "status": "Pending ",
+      "notificationSent": false
+     },
+     "guest_31": {
+      "serialNumber": 31,
+      "name": "Mr Kamal Artwani",
+      "organization": "Aircraft Industries Pvt. Ltd.",
+      "barcode": "3012345678",
+      "status": "Pending ",
+      "notificationSent": false
+     },
+     "guest_32": {
+      "serialNumber": 32,
+      "name": "Mr Kavindra Pant",
+      "organization": "Shapoorji Pallonji Energy Pvt. Ltd.",
+      "barcode": "3123456789",
+      "status": "Pending ",
+      "notificationSent": false
+     },
+     "guest_33": {
+      "serialNumber": 33,
+      "name": "Mr Sahil Kapoor",
+      "organization": "Ernst & Young",
+      "barcode": "3234567890",
+      "status": "Pending ",
+      "notificationSent": false
+     },
+     "guest_34": {
+      "serialNumber": 34,
+      "name": "Mr Ashish Khole",
+      "organization": "Solar Industries India Ltd",
+      "barcode": "3345678901",
+      "status": "Pending ",
+      "notificationSent": false
+     },
+     "guest_35": {
+      "serialNumber": 35,
+      "name": "Mr. Ajaykumar Hiremath",
+      "organization": "Actalent",
+      "barcode": "3456789012",
+      "status": "Pending ",
+      "notificationSent": false
+     },
+     "guest_36": {
+      "serialNumber": 36,
+      "name": "Mr Atul Bhadange",
+      "organization": "NSEIT",
+      "barcode": "3567890123",
+      "status": "Pending ",
+      "notificationSent": false
+     },
+     "guest_37": {
+      "serialNumber": 37,
+      "name": "Ms. Shilpa Pai",
+      "organization": "3i Infotech",
+      "barcode": "3678901234",
+      "status": "Pending ",
+      "notificationSent": false
+     },
+     "guest_38": {
+      "serialNumber": 38,
+      "name": "Mr. Swapnil Jain",
+      "organization": "47Billion",
+      "barcode": "3789012345",
+      "status": "Pending ",
+      "notificationSent": false
+     },
+     "guest_39": {
+      "serialNumber": 39,
+      "name": "Mr. Mahesh Bankar",
+      "organization": "Onix",
+      "barcode": "3890123456",
+      "status": "Pending ",
+      "notificationSent": false
+     },
+     "guest_40": {
+      "serialNumber": 40,
+      "name": "Mr. Anivesh Joshi",
+      "organization": "Infosys",
+      "barcode": "3901234567",
+      "status": "Pending ",
+      "notificationSent": false
+     }
+    }
+}
